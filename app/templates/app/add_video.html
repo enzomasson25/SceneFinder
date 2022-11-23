@@ -2,8 +2,21 @@
 
 {% block content %}
 
-    {% csrf_token %}
-    {{ form.as_table }}
+    <form action="{% url 'add_video' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for entry in form %}
+           <div>
+                {{ entry.label_tag }}
+           </div>
+           <div>
+               {{entry}}
+           </div>
+        {% endfor %}
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+
 
 {% endblock %}
 

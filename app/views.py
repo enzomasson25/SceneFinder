@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404
 from django.http import HttpResponse
 from .models import Video, Sequence, Comment
 from django.template import loader
-from app.forms import AddVideoForm
+from app.forms import VideoForm
 from django.db.models import Q
-# Create your views here.
+
 
 def get_videos(request):
     list_video = Video.objects.all()
@@ -17,14 +17,13 @@ def get_videos(request):
 
 
 def add_video(request):
-
-    # If this is a POST request then process the Form data
     if request.method == 'POST':
-        return HttpResponse("oui")
-
-    # If this is a GET (or any other method) create the default form.
+        form = VideoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
     else:
-        form = AddVideoForm()
+        form = VideoForm()
 
     context = {
         'form': form,
@@ -34,7 +33,6 @@ def add_video(request):
 
 
 def search(request):
-
     query = request.GET.get("q")
     if query == None or query == "":
         list_sequences = Sequence.objects.all()
