@@ -1,0 +1,31 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+    {% if list_video %}
+    <table>
+        <tr>
+            <td>Title</td>
+            <td>Date</td>
+            <td>Description</td>
+            <td>Length</td>
+            <td>Path</td>
+        </tr>
+    {% for video in list_video %}
+        <tr>
+            <td><a href="/video/{{video.id}}">{{ video.title }}</a></td>
+            <td>{{ video.date }}</td>
+            <td>{{ video.description }}</td>
+            <td>{{ video.length }}</td>
+            <td>{{ video.path }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+    <p>Create a video first.</p>
+    {% endif %}
+
+{% endblock %}
+
+
+

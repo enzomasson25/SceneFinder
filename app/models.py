@@ -11,7 +11,7 @@ class Video(models.Model):
     path = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.title +' - '+self.date
+        return self.title +' - '+str(self.date)
 
 class Sequence(models.Model):
     title = models.CharField(max_length=500)
@@ -20,7 +20,7 @@ class Sequence(models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title +' - '+self.video
+        return self.title +' - '+ str(self.video)
 
 
 class Comment(models.Model):

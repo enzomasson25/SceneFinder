@@ -1,0 +1,27 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+  <form action="{% url 'search' %}" method="get">
+      <input name="q" type="text" placeholder="Search...">
+  </form>
+
+  {% if list_sequences %}
+
+    {% if query %}
+      <p>Results for {{query}} :</p>
+    {% endif %}
+
+    {% for sequence in list_sequences %}
+        <p>{{sequence}}</p>
+    {% endfor %}
+
+  {% else %}
+    <p>No sequence founded.</p>
+  {% endif %}
+
+
+{% endblock %}
+
+
+
